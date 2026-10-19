@@ -1,0 +1,17 @@
+services:
+  - type: web
+    name: clearproof-demo
+    runtime: node
+    plan: free
+    buildCommand: ONNXRUNTIME_NODE_INSTALL_CUDA=skip npm ci && npm run model:download && npm run build
+    startCommand: npm start
+    healthCheckPath: /api/health
+    envVars:
+      - key: NODE_VERSION
+        value: 24.19.0
+      - key: HOST
+        value: 0.0.0.0
+      - key: PAYPAL_CLIENT_ID
+        sync: false
+      - key: PAYPAL_CLIENT_SECRET
+        sync: false

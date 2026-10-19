@@ -1,0 +1,23 @@
+{
+  "name": "clearproof",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Evidence-first, human-approved milestone checkout with local AI and PayPal Sandbox",
+  "engines": {
+    "node": ">=24.5.0"
+  },
+  "scripts": {
+    "start": "node --use-env-proxy --env-file-if-exists=.env server.mjs",
+    "test": "node --test test/*.test.mjs",
+    "verify": "node scripts/verify-pack.mjs",
+    "model:download": "node --use-env-proxy scripts/download-model.mjs",
+    "build": "node scripts/build.mjs",
+    "prestart": "npm run build"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "@huggingface/transformers": "4.3.1",
+    "ag-grid-community": "34.3.1"
+  }
+}

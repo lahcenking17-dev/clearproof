@@ -1,0 +1,16 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import { canonical, createCase, revisionOf, updateEvidence, approveMilestone, paymentQuote, orderPayload, verifyCapture, exportPack, verifyPack, importCase } from '../lib/core.mjs';
+const accept = (c, id = 'M1') => approveMilestone(c, { milestoneId: id, evidenceIds: ['E1'], revision: revisionOf(c), reviewer: 'Demo client', note: 'I inspected this source and accept this milestone.' });
+test('canonical hash is stable across object key order but not array order', () => { assert.equal(canonical({ b: 2, a: 1 }), canonical({ a: 1, b: 2 })); assert.notEqual(canonical([1, 2]), canonical([2, 1])); });
+test('AI suggestions alone cannot authorize checkout', () => { const c = createCase(); assert.throws(() => paymentQuote(c, ['M1']), { code: 'REVIEW_REQUIRED' }); });
+test('quote prices exactly the accepted subset using integer cents', () => { const c = createCase(); accept(c); const q = paymentQuote(c, ['M1']); assert.equal(q.value, '150.00'); assert.equal(q.cents, 15000); const p = orderPayload(c, q, 'https://example.com'); assert.equal(p.purchase_units[0].amount.value, '150.00'); assert.equal(p.purchase_units[0].custom_id, 'cp:' + q.binding); assert.throws(() => paymentQuote(c, ['M1', 'M1'])); });
+test('source mutation invalidates every approval and stale review cannot be replayed', () => { const c = createCase(); const rev = revisionOf(c); accept(c); updateEvidence(c, 'E1', 'The delivery changed.'); assert.deepEqual(c.approvals, {}); assert.throws(() => paymentQuote(c, ['M1']), { code: 'REVIEW_REQUIRED' }); assert.throws(() => approveMilestone(c, { milestoneId: 'M1', revision: rev }), { code: 'STALE_REVISION' }); });
+test('capture is rejected on wrong evidence binding, amount, currency, order, or pending status', () => {
+  const c = createCase(); accept(c); const q = { ...paymentQuote(c, ['M1']), id: 'TESTORDER' };
+  const result = { id: q.id, status: 'COMPLETED', purchase_units: [{ custom_id: 'cp:' + q.binding, payments: { captures: [{ id: 'TESTCAPTURE', status: 'COMPLETED', amount: { value: '150.00', currency_code: 'USD' } }] } }] };
+  assert.equal(verifyCapture(result, q).captureId, 'TESTCAPTURE');
+  for (const mutate of [r => r.id = 'OTHER', r => r.status = 'APPROVED', r => r.purchase_units[0].custom_id = 'cp:wrong', r => r.purchase_units[0].payments.captures[0].amount.value = '1.00', r => r.purchase_units[0].payments.captures[0].amount.currency_code = 'EUR']) { const r = structuredClone(result); mutate(r); assert.throws(() => verifyCapture(r, q)); }
+});
+test('export verifies; changing a source, approval, or event breaks verification', () => { const c = createCase(); accept(c); const p = exportPack(c); assert.equal(verifyPack(p).valid, true); for (const mutate of [x => x.case.evidence[0].text += ' changed', x => x.case.approvals.M1.note += ' altered', x => x.case.events.reverse()]) { const x = structuredClone(p); mutate(x); assert.equal(verifyPack(x).valid, false); } });
+test('imports enforce amounts, boundaries and regenerated IDs', () => { const c = createCase(); assert.equal(importCase(c).milestones[0].id, 'M1'); assert.throws(() => importCase({ ...c, milestones: [{ title: 'x', criterion: 'y', cents: -1 }] }), { code: 'INVALID_AMOUNT' }); assert.throws(() => importCase({ ...c, milestones: [] })); });
