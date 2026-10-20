@@ -1,0 +1,170 @@
+{
+  "format": "clearproof.pack.v1",
+  "exportedAt": "2026-10-19T09:53:00.949Z",
+  "limitations": [
+    "Synthetic demo records are not real delivery evidence.",
+    "Hashes detect changes relative to this export; they do not prove truth, authorship or a trusted timestamp.",
+    "Named acceptance is self-attested, not verified identity or a legal signature.",
+    "AI similarity suggests records to review; it is not a delivery verdict, fraud probability or legal advice.",
+    "Sandbox transactions move no real funds."
+  ],
+  "case": {
+    "schema": "clearproof.snapshot.v1",
+    "caseId": "7b11c854-2a39-484a-ad18-db4347a8c0c9",
+    "title": "A website handover, without the ambiguity",
+    "currency": "USD",
+    "scope": "Three separately payable milestones. The client reviews the supporting evidence for each milestone before authorizing its payment. Repository access and accessibility checks remain separate deliverables. No escrow or legal certification is provided.",
+    "milestones": [
+      {
+        "id": "M1",
+        "title": "Responsive landing page",
+        "criterion": "Deliver a responsive landing page with desktop and mobile layouts.",
+        "cents": 15000
+      },
+      {
+        "id": "M2",
+        "title": "Editable source handover",
+        "criterion": "Deliver the editable source files and grant the client access to the source code repository.",
+        "cents": 20000
+      },
+      {
+        "id": "M3",
+        "title": "Accessibility review",
+        "criterion": "Complete an accessibility review covering keyboard navigation and image alternative text.",
+        "cents": 10000
+      }
+    ],
+    "evidence": [
+      {
+        "id": "E1",
+        "title": "Design delivery note",
+        "kind": "Delivery record",
+        "author": "Mina",
+        "text": "The responsive landing page is ready for review. Desktop and mobile layouts are included in the delivery package. The layout adapts to narrow screens. This delivery covers the landing page milestone only.",
+        "recordedAt": "2026-10-18T09:00:00.000Z"
+      },
+      {
+        "id": "E2",
+        "title": "Repository handover message",
+        "kind": "Message",
+        "author": "Mina",
+        "text": "The editable source files and source code repository access have not been delivered yet. Repository access is still pending. Please do not mark the source handover as complete.",
+        "recordedAt": "2026-10-18T09:10:00.000Z"
+      },
+      {
+        "id": "E3",
+        "title": "Accessibility status",
+        "kind": "Review note",
+        "author": "Mina",
+        "text": "The accessibility review is not complete. Keyboard navigation has an unresolved issue. Image alternative text checks are still pending. The review will be delivered in a later milestone.",
+        "recordedAt": "2026-10-18T09:20:00.000Z"
+      },
+      {
+        "id": "E4",
+        "title": "Client layout feedback",
+        "kind": "Client message",
+        "author": "Northstar Studio",
+        "text": "I reviewed the desktop and mobile landing page layouts. Both display correctly and the responsive design looks good. I have not reviewed the repository access or accessibility deliverables.",
+        "recordedAt": "2026-10-18T10:00:00.000Z"
+      }
+    ],
+    "client": "Northstar Studio",
+    "freelancer": "Mina — independent web designer",
+    "fixture": true,
+    "revision": "5ef47091f34704eec44be78d09d90650c8085a554a7ee8aebe69cc0a4b71ee76",
+    "approvals": {
+      "M1": {
+        "milestoneId": "M1",
+        "reviewer": "Demo Client",
+        "note": "I inspected the desktop and mobile layout records. I accept M1 only; source code and accessibility remain separate.",
+        "evidenceIds": [
+          "E1",
+          "E4"
+        ],
+        "revision": "5ef47091f34704eec44be78d09d90650c8085a554a7ee8aebe69cc0a4b71ee76",
+        "at": "2026-10-19T09:52:13.302Z",
+        "kind": "self-attested named review; identity not verified"
+      }
+    },
+    "orders": [
+      {
+        "id": "3VH33156E8940273M",
+        "status": "COMPLETED",
+        "value": "150.00",
+        "currency": "USD",
+        "milestoneIds": [
+          "M1"
+        ],
+        "binding": "48d24b09b75e2c4927cbb3f74bc783f1ca2241258bc295950554ac3e9f756550",
+        "captureId": "5T1418876C6484934"
+      }
+    ],
+    "events": [
+      {
+        "index": 0,
+        "at": "2026-10-19T09:51:46.083Z",
+        "type": "CASE_CREATED",
+        "detail": {
+          "fixture": true,
+          "revision": "5ef47091f34704eec44be78d09d90650c8085a554a7ee8aebe69cc0a4b71ee76"
+        },
+        "previousHash": "0000000000000000000000000000000000000000000000000000000000000000",
+        "hash": "0fc888d2c5ddc0655113a31107d45b25414f5dec7d15e24d46d65bdf87b059c5"
+      },
+      {
+        "index": 1,
+        "at": "2026-10-19T09:52:13.302Z",
+        "type": "MILESTONE_ACCEPTED",
+        "detail": {
+          "milestoneId": "M1",
+          "reviewer": "Demo Client",
+          "note": "I inspected the desktop and mobile layout records. I accept M1 only; source code and accessibility remain separate.",
+          "evidenceIds": [
+            "E1",
+            "E4"
+          ],
+          "revision": "5ef47091f34704eec44be78d09d90650c8085a554a7ee8aebe69cc0a4b71ee76",
+          "at": "2026-10-19T09:52:13.302Z",
+          "kind": "self-attested named review; identity not verified"
+        },
+        "previousHash": "0fc888d2c5ddc0655113a31107d45b25414f5dec7d15e24d46d65bdf87b059c5",
+        "hash": "cff24bfb5000be437f76d560f24e9633739b48385a0ffaf7f529381e79ab84c1"
+      },
+      {
+        "index": 2,
+        "at": "2026-10-19T09:52:20.411Z",
+        "type": "SANDBOX_ORDER_CREATED",
+        "detail": {
+          "orderId": "3VH33156E8940273M",
+          "binding": "48d24b09b75e2c4927cbb3f74bc783f1ca2241258bc295950554ac3e9f756550",
+          "value": "150.00",
+          "currency": "USD",
+          "milestoneIds": [
+            "M1"
+          ]
+        },
+        "previousHash": "cff24bfb5000be437f76d560f24e9633739b48385a0ffaf7f529381e79ab84c1",
+        "hash": "a78b5c8f1bddc986107229939c5a8fc9c250221ea9d63a21f43184616d5b8fb1"
+      },
+      {
+        "index": 3,
+        "at": "2026-10-19T09:52:48.548Z",
+        "type": "SANDBOX_CAPTURE_COMPLETED",
+        "detail": {
+          "orderId": "3VH33156E8940273M",
+          "captureId": "5T1418876C6484934",
+          "binding": "48d24b09b75e2c4927cbb3f74bc783f1ca2241258bc295950554ac3e9f756550",
+          "value": "150.00",
+          "currency": "USD"
+        },
+        "previousHash": "a78b5c8f1bddc986107229939c5a8fc9c250221ea9d63a21f43184616d5b8fb1",
+        "hash": "3ac52a10117e22b1b1e85df02290b297a543ec3fbae86a1b3d41d6e9b0bea119"
+      }
+    ]
+  },
+  "integrity": {
+    "algorithm": "SHA-256",
+    "canonicalization": "recursive lexicographic object keys; array order preserved; JSON primitives",
+    "bodySha256": "9dd33068b31ba6fe91da802143597e02aead8f444f799b5f612cf0f8da49b16e"
+  }
+}

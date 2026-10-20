@@ -1,6 +1,6 @@
 # ClearProof — evidence-first handover
 
-**Submission status: draft, not entered.** Public repository creation and a final public YouTube video remain required. Actual PayPal Sandbox create/approve/capture has been verified. This file is prepared for the account holder's Devpost entry; it is not a claim of successful submission.
+**Submission status: draft, not entered.** The public source repository and actual PayPal Sandbox create/approve/capture are verified. The final public YouTube upload, additional fields and final Devpost submission remain pending. This file is prepared for the account holder's Devpost entry; it is not a claim of successful submission.
 
 ## Elevator pitch
 
@@ -44,7 +44,7 @@ Another challenge is evidence changing after acceptance. Binding the source revi
 - Thirteen passing core, API, model and concurrency tests, with zero skips in the observed local run.
 - Browser verification of review, accepted-subset pricing, disabled unconfigured checkout, AG Grid filtering, export verification, acceptance invalidation and a mobile layout with no horizontal overflow.
 - Zero known vulnerabilities reported by npm audit after updating the runtime dependencies, as of the observed verification date.
-- A public-ready MIT source package and reproducible judging setup, prepared for publication.
+- A public MIT-licensed source repository with reproducible judging setup and a successful GitHub Actions verification run.
 
 These are engineering checks, not evidence of commercial adoption, legal validity, successful dispute recovery or competition success.
 
